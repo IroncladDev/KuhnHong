@@ -38,3 +38,7 @@ body {
   background: var(--w-5);
   overflow-x: hidden;
 }
+
+[href]:hover{
+  cursor: pointer !important;
+}

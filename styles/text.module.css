@@ -34,3 +34,9 @@
 .textCenter{
   text-align: center !important;
 }
+.link{
+  text-decoration: none !important;
+}
+.link:hover{
+  cursor: pointer !important;
+}

@@ -6,6 +6,7 @@ import pos from '../styles/pos.module.css';
 import text from '../styles/text.module.css';
 import cs from '../scripts/multiclass'
 import Path from '../components/curvePath'
+import Nav from '../components/nav'
 
 export default function Home() {
   return (
@@ -33,6 +34,8 @@ export default function Home() {
         </section>
         <section className={cont.relcont}></section>
 
+
+        <Nav/>
       </div>
     </div>
   )
