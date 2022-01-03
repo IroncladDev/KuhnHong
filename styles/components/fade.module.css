@@ -1,0 +1,10 @@
+.transparent {
+  opacity: 0;
+  transition: 1.5s;
+  transform: translatey(50px);
+}
+.visible {
+  opacity: 1;
+  transition: 1.5s;
+  transform: translatey(0px);
+}

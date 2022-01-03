@@ -32,6 +32,21 @@
 .slantSec{
   filter: drop-shadow(0 -30px 15px rgba(0,0,0,0.1));
 }
+.parallax{
+  background-attachment: fixed;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  min-height: 100vh;
+}
+.parCont > h1{
+  font-family: var(--font-title);
+  color: white;
+  text-align: center;
+  font-size: 4em;
+  padding-top: 30px;
+  text-shadow: 0 5px 10px rgba(0,0,0,0.4);
+}
 
 
 @media (max-width: 1000px) {
