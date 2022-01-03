@@ -1,0 +1,36 @@
+.header{
+  font-family: var(--font-title);
+  color: var(--g-dark);
+  text-align: center;
+  padding-top: 50px;
+}
+
+.h1{
+  font-size: 4em;
+}
+.h2{
+  font-size: 3em;
+}
+.h3{
+  font-size: 2.5em;
+}
+.h4 {
+  font-size: 2em;
+  padding-top: 25px;
+}
+.h5{
+  font-size: 1.5em;
+  padding-top: 25px;
+}
+.h6{
+  font-size: 1em;
+  padding-top: 25px;
+}
+
+.textLeft{
+  text-align: left !important;
+}
+
+.textCenter{
+  text-align: center !important;
+}

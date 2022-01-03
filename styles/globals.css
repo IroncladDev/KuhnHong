@@ -1,16 +1,40 @@
-html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-}
+@import url("https://fonts.googleapis.com/css2?family=Alex+Brush&family=Manrope:wght@200;300;400;500&display=swap");
+:root {
+  --font-title: "Alex Brush", "Savoye LET", "cursive";
+  --font-text: "Manrope", "Avenir Book", sans-serif;
+  --y-bright: rgb(255, 221, 128);
+  --y-light: rgb(237, 202, 107);
+  --y-med: rgb(227, 182, 87);
+  --y-dim: rgb(207, 162, 67);
+  --y-pale: rgb(237, 219, 171);
 
-a {
-  color: inherit;
-  text-decoration: none;
+  --w-5: rgb(255, 255, 255);
+  --w-4: rgb(250, 250, 250);
+  --w-3: rgb(240, 240, 240);
+  --w-2: rgb(220, 220, 220);
+  --w-1: rgb(200, 200, 200);
+
+  --g-bright: rgb(150, 150, 150);
+  --g-med: rgb(100, 100, 100);
+  --g-dim: rgb(75, 75, 75);
+  --g-dark: rgb(40, 40, 40);
+
+  --bk: rgb(0, 0, 0);
+  --nav-height: 0px;
 }
 
 * {
   box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: var(--font-text);
+  font-weight: 200;
+  background: var(--w-5);
+  overflow-x: hidden;
 }

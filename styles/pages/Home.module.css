@@ -1,0 +1,59 @@
+.blockDesc{
+  display: flex;
+}
+.blockDesc{
+  max-width: 40vw;
+  align-self: center;
+  justify-self: center;
+}
+.contFlex {
+  position: relative;
+  top: 50vh;
+  transform: translatey(-50%);
+  margin-left: 10vw;
+  max-width: 80vw;
+  display: flex;
+}
+.blockPortrait{
+  flex-grow: 1;
+  align-self: center;
+  justify-self: center;
+}
+.portrait {
+  height: 70vh;
+  max-height: 800px;
+  margin: auto;
+  box-shadow: 15px 25px 20px 0 rgba(0,0,0,0.2);
+}
+.stretchSVG{
+  width: 100vw;
+  height: 100vh;
+}
+.slantSec{
+  filter: drop-shadow(0 -30px 15px rgba(0,0,0,0.1));
+}
+
+
+@media (max-width: 1000px) {
+  .headBlock {
+    max-width: 60vw;
+  }
+}
+@media(max-width: 800px){
+  .blockPortrait{
+    display: none;
+  }
+  .blockDesc{
+    max-width: 80vw;
+  }
+}
+@media (max-width: 675px) {
+  .header {
+    max-width: 80vw;
+  }
+}
+@media (max-width: 500px) {
+  .title {
+    font-size: 3em;
+  }
+}

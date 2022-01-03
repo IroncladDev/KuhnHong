@@ -1,0 +1,35 @@
+.blockSlant {
+  max-height: 400px;
+  height: 50vh;
+  width: 100%;
+}
+.stackGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+.stackLayer {
+  grid-row-start: 1;
+  grid-column-start: 1;
+}
+.stackBlock {
+  width: 100%;
+  min-height: 100vh;
+  height: auto;
+}
+
+.centerx {
+  position: relative;
+  left: 50%;
+  transform: translatex(-50%);
+}
+.centery {
+  position: relative;
+  top: 50%;
+  transform: translatey(-50%);
+}
+.centerxy {
+  position: relative;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
