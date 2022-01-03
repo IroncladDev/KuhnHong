@@ -37,7 +37,7 @@
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-  min-height: 100vh;
+  min-height: calc(100vh - 70px);
 }
 .parCont > h1{
   font-family: var(--font-title);
@@ -46,6 +46,14 @@
   font-size: 4em;
   padding-top: 30px;
   text-shadow: 0 5px 10px rgba(0,0,0,0.4);
+}
+.galleryLink{
+  color: var(--y-med);
+  text-decoration: underline;
+  text-align: center;
+  font-size: 30px;
+  font-family: var(--font-title);
+  margin: 50px 0;
 }
 
 

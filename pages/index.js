@@ -8,6 +8,8 @@ import cs from '../scripts/multiclass'
 import Path from '../components/curvePath'
 import Nav from '../components/nav';
 import Fade from '../components/fade';
+import Link from 'next/link'
+import ui from '../styles/ui.module.css'
 
 export default function Home() {
   return (
@@ -71,6 +73,16 @@ export default function Home() {
               <h1>Painting Three</h1>
             </div>
           </div>
+        </section>
+
+        <section style={{paddingBottom: 50}}>
+          <h1 className={cs(text.header, text.h1)} style={{marginBottom: 50 }}>More than just Paint</h1>
+          <Link href="/gallery" passHref>
+            <div className={ui.button}>See my Gallery</div>
+          </Link>
+          <Link href="/about" passHref>
+            <div className={ui.button}>About Me</div>
+          </Link>
         </section>
 
 

@@ -1,0 +1,16 @@
+.button{
+  background: var(--y-med);
+  color: var(--w-5);
+  padding: 15px;
+  border-radius: 5px;
+  margin: 25px auto;
+  text-align: center;
+  max-width: 300px;
+  font-size: 20px;
+  font-weight: 400;
+  box-shadow: inset 0 0 0 0 var(--y-dim);
+  transition: 0.25s;
+}
+.button:hover{
+  box-shadow: inset 300px 0 0 0 var(--y-dim);
+}
