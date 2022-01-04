@@ -10,7 +10,30 @@
   font-weight: 400;
   box-shadow: inset 0 0 0 0 var(--y-dim);
   transition: 0.25s;
+  border: none;
+  font-family: var(--font-text);
+  display: block;
+  width: 80%;
 }
 .button:hover{
   box-shadow: inset 300px 0 0 0 var(--y-dim);
+  cursor: pointer;
+}
+
+.input{
+  background: var(--w-5);
+  border: solid var(--w-2) 2px;
+  padding: 15px;
+  border-radius: 5px;
+  font-family: var(--font-text);
+  outline: none;
+  width: 80%;
+  display: block;
+  margin: 0 auto;
+  max-width: 400px;
+  transition: 0.1s;
+}
+.input:focus{
+  box-shadow: 0 0 0 5px rgba(50, 150, 255, 0.5);
+  border: solid var(--w-1) 1px;
 }

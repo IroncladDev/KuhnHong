@@ -39,7 +39,7 @@
   background-position: center;
   min-height: calc(100vh - 70px);
 }
-.parCont > h1{
+.parCont > h1, .galleryLink{
   font-family: var(--font-title);
   color: white;
   text-align: center;
@@ -47,15 +47,14 @@
   padding-top: 30px;
   text-shadow: 0 5px 10px rgba(0,0,0,0.4);
 }
-.galleryLink{
-  color: var(--y-med);
-  text-decoration: underline;
-  text-align: center;
-  font-size: 30px;
-  font-family: var(--font-title);
-  margin: 50px 0;
+.slantEnd{
+  clip-path: polygon(0 0, 0% 100%, 100% 100%);
+  width: 100vw;
+  max-height: 100px;
+  background: var(--w-5);
+  height: 10vh;
+  margin-top: 50px;
 }
-
 
 @media (max-width: 1000px) {
   .headBlock {
@@ -69,14 +68,17 @@
   .blockDesc{
     max-width: 80vw;
   }
+  .titleHeader{
+    text-align: center !important;
+  }
 }
 @media (max-width: 675px) {
-  .header {
-    max-width: 80vw;
+  .titleHeader {
+    max-width: 80vw !important;
   }
 }
 @media (max-width: 500px) {
-  .title {
-    font-size: 3em;
+  .titleHeader {
+    font-size: 3em !important;
   }
 }

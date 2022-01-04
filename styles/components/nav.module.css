@@ -31,3 +31,28 @@
   display: inline-block;
   align-self: center;
 }
+
+@media(max-width: 525px){
+  .link{
+    width: 50%;
+  }
+}
+@media(max-width: 375px){
+  .bigLink{
+    font-size: 25px;
+  }
+  .link{
+    font-size: 15px;
+  }
+  .nav{
+    height: 40px;
+  }
+}
+@media(max-width: 300px){
+  .link{
+    font-size: 13px;
+  }
+  .bigLink{
+    font-size: 22px;
+  }
+}

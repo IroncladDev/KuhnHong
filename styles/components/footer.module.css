@@ -1,0 +1,23 @@
+.footer{
+  padding-bottom: 50px;
+}
+.links{
+  text-align: center;
+}
+.links > a {
+  margin: 20px;
+  color: var(--bk);
+  text-decoration: none;
+}
+.bound{
+  position: relative;
+  left: 50%;
+  transform: translatex(-50%);
+  max-width: 800px;
+  width: 80%;
+}
+.svgBlock{
+  width: 100vw;
+  max-height: 100px;
+  filter: drop-shadow(0 -30px 15px rgba(0,0,0,0.05));
+}

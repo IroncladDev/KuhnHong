@@ -10,6 +10,7 @@ import Nav from '../components/nav';
 import Fade from '../components/fade';
 import Link from 'next/link'
 import ui from '../styles/ui.module.css'
+import Footer from '../components/footer'
 
 export default function Home() {
   return (
@@ -73,18 +74,29 @@ export default function Home() {
               <h1>Painting Three</h1>
             </div>
           </div>
+
+          <div>
+            <Link href="/gallery" passHref>
+              <h1 className={styles.galleryLink} style={{ fontSize: '3em', textDecoration: 'underline' }}>See my Gallery</h1>
+            </Link>
+
+            <div className={styles.slantEnd}></div>
+          </div>
         </section>
 
-        <section style={{paddingBottom: 50}}>
-          <h1 className={cs(text.header, text.h1)} style={{marginBottom: 50 }}>More than just Paint</h1>
-          <Link href="/gallery" passHref>
-            <div className={ui.button}>See my Gallery</div>
-          </Link>
-          <Link href="/about" passHref>
-            <div className={ui.button}>About Me</div>
-          </Link>
+        <section style={{ paddingBottom: 50 }}>
+          <h1 className={cs(text.header, text.h1)} style={{ marginBottom: 50 }}>Art from a new Perspective</h1>
+          <p>Want to stay updated with the latest news and new paintings?  Be sure to subscribe!</p>
+          <form method="POST" action="/" onSubmit={(e) => {
+            e.preventDefault();
+            alert("Implement Subscribe Form API")
+          }}>
+            <input className={ui.input} placeholder="you@email.com" name="email" />
+            <button className={ui.button}>Submit</button>
+          </form>
         </section>
 
+        <Footer />
 
         <Nav />
       </div>
