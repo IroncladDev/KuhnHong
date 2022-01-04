@@ -4,7 +4,6 @@ import Nav from '../components/nav';
 import styles from '../styles/pages/Gallery.module.css'
 import { Component, createRef } from 'react';
 import Script from 'next/script'
-import { urlencoded } from 'body-parser';
 const Types = ["Previous Exhibitions", "Landscapes", "Portraits", "Figures", "Still Life"]
 
 export default class Gallery extends Component {
