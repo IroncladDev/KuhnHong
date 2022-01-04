@@ -45,6 +45,9 @@ export default class Gallery extends Component {
       console.log(this.state.data)
     })
   }
+  componentDidMount() {
+    this.sortCategories({ target: { value: 0 } });
+  }
   render() {
     return (
       <div>
@@ -74,11 +77,13 @@ export default class Gallery extends Component {
                 <select className={styles.sorter} onChange={this.sortCategories}>
                   {Types.map((t, ind) => <option key={ind} value={ind}>{t}</option>)}
                 </select>
-                {this.state.data.map((d, ind) => <div onClick={() => {
-                  this.setState({
-                    index: ind
-                  })
-                }} className={`${styles.dot} ${ind === this.state.index && styles.dotSelected}`} key={ind}></div>)}
+                <div style={{display: 'flex'}}>
+                  {this.state.data.map((d, ind) => <div onClick={() => {
+                    this.setState({
+                      index: ind
+                    })
+                  }} className={`${styles.dot} ${ind === this.state.index && styles.dotSelected}`} key={ind}></div>)}
+                </div>
               </div>
             </div>
             <div className={styles.sld}>

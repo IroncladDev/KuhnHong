@@ -103,13 +103,6 @@
   max-width: 600px;
   margin: 0 auto;
 }
-.mag {
-  position: absolute;
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  border: solid rgba(255, 255, 255, 0.5) 2px;
-}
 .sorter{
   background: transparent;
   color: white;
@@ -129,5 +122,39 @@
   }
   .gcont {
     padding-top: 40px;
+  }
+}
+@media(max-width: 800px){
+  .sld{
+    width: 30px;
+  }
+  .slideBtn{
+    width: 30px;
+    height: 30px;
+    font-size: 20px;
+  }
+}
+@media(max-width: 500px){
+  .imageTitle{
+    font-size: 2em;
+  }
+  .imageDesc{
+    font-size: 16px;
+  }
+  .imageStats{
+    font-size: 17px;
+  }
+  .centerCore{
+    flex-grow: 0;
+    width: calc(100vw - 60px);
+  }
+  .dots{
+    display: block;
+  }
+  .dot{
+    width: 10px;
+    height: 10px;
+    border-width: 2px;
+    margin: 10px 5px;
   }
 }
