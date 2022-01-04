@@ -15,7 +15,7 @@
   --w-2: rgb(220, 220, 220);
   --w-1: rgb(200, 200, 200);
 
-  --g-bright: rgb(150, 150, 150);
+  --g-bright: rgb(120, 120, 120);
   --g-med: rgb(100, 100, 100);
   --g-dim: rgb(75, 75, 75);
   --g-dark: rgb(40, 40, 40);
@@ -56,6 +56,7 @@ p{
   -moz-hyphens: auto;
   -ms-hyphens: auto;
   hyphens: auto;
+  font-weight: 300;
   letter-spacing: 0.01em;
 }
 hr{
