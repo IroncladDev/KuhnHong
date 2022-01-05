@@ -6,7 +6,7 @@ import cont from '../styles/cont.module.css'
 import text from '../styles/text.module.css'
 import styles from '../styles/pages/blog.module.css'
 import Swal from 'sweetalert2'
-import { useState, Component } from 'react'
+import { Component } from 'react'
 
 function Post(props) {
   function popup() {
