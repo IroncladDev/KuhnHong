@@ -14,6 +14,7 @@ export default class ADM extends Component {
     }
     this.getBase64 = this.getBase64.bind(this);
     this.submit = this.submit.bind(this);
+    this.componentDidMount = this.componentDidMount.bind(this);
   }
   getBase64(e) {
     var self = this;
@@ -45,9 +46,6 @@ export default class ADM extends Component {
     const cookie = name => `; ${document.cookie}`.split(`; ${name}=`).pop().split(';').shift();
     if (cookie("admin_session")) {
       this.setState({ loggedIn: true })
-      setTimeout(function(){
-        location.reload();
-      }, 1000 * 60 * 30)
     }
     let self = this;
     fetch("/api/paintings").then(r => r.json()).then(data => {
@@ -73,6 +71,7 @@ export default class ADM extends Component {
         text: "Success!  You are officially logged in.  You will be redirected shortly.",
         timer: 3000,
         icon: "success",
+        showConfirmButton: false,
         timerProgressBar: true,
         willClose: () => {
           location.reload();
@@ -89,9 +88,9 @@ export default class ADM extends Component {
   render() {
     return (<div>
       <Head>
-        <title>{this.loggedIn ? "Administration" : "Log In"}</title>
+        <title>Administration</title>
       </Head>
-      {this.state.loggedIn && <Admin data={this.state.data} />}
+      {this.state.loggedIn && <Admin data={this.state.data} updateData={this.componentDidMount}/>}
       {!this.state.loggedIn && <div>
         <form method="POST" action="/api/authenticate" className={ui.form} style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', minWidth: 300 }} onSubmit={this.submit}>
           <h2 className={ui.formHeader} style={{ marginBottom: 20 }}>Please Log In</h2>

@@ -23,5 +23,11 @@ const paintingSchema = new mongoose.Schema({
   image: { type: String, index: true }
 })
 
+const subscriber = new mongoose.Schema({
+  email: { type: String, index: true },
+  addr: { type: String, index: true }
+})
+
 export const Post = mongoose.models.Post || mongoose.model("Post", postSchema);
 export const Pic = mongoose.models.Pic || mongoose.model("Pic", paintingSchema);
+export const Sub = mongoose.models.Sub || mongoose.model("Sub", subscriber)

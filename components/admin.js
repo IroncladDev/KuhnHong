@@ -4,6 +4,7 @@ import ui from '../styles/ui.module.css'
 import cont from '../styles/cont.module.css'
 import Swal from 'sweetalert2';
 
+
 const Toast = Swal.mixin({
   toast: true,
   position: 'top-end',
@@ -27,7 +28,7 @@ class CreatePic extends Component {
     this.getBase64 = this.getBase64.bind(this);
     this.submit = this.submit.bind(this);
   }
-  submit(e){
+  submit(e) {
     e.preventDefault();
     const cookie = name => `; ${document.cookie}`.split(`; ${name}=`).pop().split(';').shift();
     fetch("/api/addpic", {
@@ -46,14 +47,14 @@ class CreatePic extends Component {
         auth: cookie("admin_session")
       })
     }).then(r => r.json()).then(data => {
-      if(data.success){
+      if (data.success) {
         document.getElementById("upload-form").reset();
         Swal.fire({
           title: "Painting Added!",
           text: "Your painting was succesfully uploaded.",
           icon: "success"
         })
-      }else{
+      } else {
         Swal.fire({
           title: "Failed",
           text: data.message,
@@ -96,13 +97,13 @@ class CreatePic extends Component {
     return (<form className={ui.form} onSubmit={this.submit} id="upload-form">
       <h1 className={ui.formHeader}>Add a Painting</h1>
       <div className={ui.formLabel}>Painting Title</div>
-      <input className={ui.inputSmall} placeholder="Make it Catchy" name="title" required/>
+      <input className={ui.inputSmall} placeholder="Make it Catchy" name="title" required />
       <div className={ui.formLabel}>Painting Decription</div>
       <textarea className={ui.inputSmall} name="description" rows="2" placeholder="Describe it well" required></textarea>
       <div className={ui.formLabel}>Upload the Painting</div>
-      <input className={ui.submit} type="file" onChange={this.getBase64} name="image" required/>
+      <input className={ui.submit} type="file" onChange={this.getBase64} name="image" required />
       <div className={ui.formLabel}>Price (USD)</div>
-      <input className={ui.inputSmall} placeholder="$$$" name="price" type="number" required/>
+      <input className={ui.inputSmall} placeholder="$$$" name="price" type="number" accept="image/*" required />
       <div className={ui.formLabel}>Is it available for purchase? (sold/unsold)</div>
       <select name="sold" className={ui.submit}>
         <option value="false">Unsold</option>
@@ -114,7 +115,169 @@ class CreatePic extends Component {
         {Types.map((d, i) => <option key={i} value={i}>{d}</option>)}
       </select>
 
-      <button type="submit" className={ui.button} style={{marginBottom: 0}}>Submit</button>
+      <button type="submit" className={ui.button} style={{ marginBottom: 0 }}>Submit</button>
+    </form>)
+  }
+}
+
+class MarkPics extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: 0
+    }
+    this.update = this.update.bind(this);
+    this.markSold = this.markSold.bind(this);
+    this.del = this.del.bind(this);
+  }
+  update(e) {
+    this.setState({
+      value: e.target.value
+    })
+  }
+  async markSold() {
+    const { value: password } = await Swal.fire({
+      title: 'Mark painting as sold?',
+      text: "Are you sure you would like to mark the painting “" + this.props.data[this.state.value].title + "” as sold?  You cannot undo this action.",
+      input: 'password',
+      inputLabel: 'Password',
+      inputPlaceholder: 'Enter password',
+      icon: 'warning',
+      showCancelButton: true
+    })
+
+    if (password) {
+      fetch("/api/mark", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "accept": "*/*"
+        },
+        body: JSON.stringify({
+          psw: password,
+          dataId: this.props.data[this.state.value]._id
+        })
+      }).then(r => r.json())
+        .then(data => {
+          if (data.success) {
+            this.props.updateData();
+            Swal.fire({
+              title: "Marked as Sold",
+              text: "Painting was successfully marked as Sold",
+              icon: "success"
+            })
+          } else {
+            Swal.fire({
+              title: "Failed",
+              text: data.message,
+              icon: "error"
+            })
+          }
+        })
+    }
+  }
+  async del() {
+    const { value: password } = await Swal.fire({
+      title: 'Delete Painting?',
+      text: "Are you sure you would like to delete the painting “" + this.props.data[this.state.value].title + "”? You cannot undo this action.",
+      input: 'password',
+      inputLabel: 'Password',
+      inputPlaceholder: 'Enter password',
+      icon: 'warning',
+      showCancelButton: true
+    })
+
+    if (password) {
+      fetch("/api/del", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "accept": "*/*"
+        },
+        body: JSON.stringify({
+          psw: password,
+          dataId: this.props.data[this.state.value]._id
+        })
+      }).then(r => r.json())
+        .then(data => {
+          if (data.success) {
+            this.props.updateData();
+            Swal.fire({
+              title: "Deleted",
+              text: "Painting was successfully deleted.",
+              icon: "success"
+            })
+          } else {
+            Swal.fire({
+              title: "Failed",
+              text: data.message,
+              icon: "error"
+            })
+          }
+        })
+    }
+  }
+  render() {
+    return (<div className={ui.form}>
+      <h2 className={ui.formHeader}>Painting Actions</h2>
+      <div className={ui.formLabel}>Select Painting</div>
+      <select name="selectPainting" onChange={this.update} value={this.state.value} className={ui.submit}>
+        {this.props.data.map((x, i) => <option key={i} value={i}>{x.title}</option>)}
+      </select>
+
+      <div style={{ display: 'flex' }}>
+        <button className={ui.submit} style={{ marginTop: 20, marginRight: 5 }} onClick={this.markSold}>Mark as Sold</button>
+        <button className={ui.submit} style={{ background: 'rgb(255, 75, 75)', marginTop: 20, marginLeft: 5 }} onClick={this.del}>Delete</button>
+      </div>
+    </div>)
+  }
+
+}
+
+class Emf extends Component {
+  constructor(props) {
+    super(props);
+    this.submit = this.submit.bind(this);
+  }
+  submit(e) {
+    e.preventDefault();
+    fetch("/api/email", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "accept": "*/*"
+      },
+      body: JSON.stringify({
+        title: e.target.title.value,
+        body: e.target.body.value,
+        psw: e.target.password.value
+      })
+    }).then(r => r.json()).then(data => {
+      if(data.success){
+        Swal.fire({
+          title: "Sent!",
+          text: "Email sent to all subscribers.",
+          icon: "success",
+        })
+      }else{
+        Swal.fire({
+          title: "Failed",
+          text: data.message,
+          icon: "error",
+        })
+      }
+    })
+  }
+  render() {
+    return (<form onSubmit={this.submit} className={ui.form} id="emform">
+      <h2 className={ui.formHeader}>Email Subscribers</h2>
+      <div className={ui.formLabel}>Subject</div>
+      <input className={ui.inputSmall} name="title" placeholder="My newest painting..." />
+      <div className={ui.formLabel}>Message Body</div>
+      <textarea placeholder="body content..." name="body" rows="4" className={ui.inputSmall}></textarea>
+      <div className={ui.formLabel}>Confirm Password</div>
+      <input className={ui.inputSmall} name="password" placeholder="It's a secret!" />
+      <button type="submit" className={ui.submit} style={{marginTop: 20}}>Send</button>
     </form>)
   }
 }
@@ -123,13 +286,15 @@ export default class Admin extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      
+
     }
   }
   render() {
     return (<div>
       <div className={cont.relcont}>
         <CreatePic />
+        <MarkPics updateData={this.props.updateData} data={this.props.data} />
+        <Emf />
       </div>
     </div>)
   }
