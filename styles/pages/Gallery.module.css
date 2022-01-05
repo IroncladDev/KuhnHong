@@ -65,7 +65,9 @@
 }
 .imageStats {
   color: white;
-  font-size: 25px;
+  font-size: 13px;
+  border-top: solid white 1px;
+  padding-top: 5px;
 }
 .dots {
   position: absolute;
@@ -142,7 +144,7 @@
     font-size: 16px;
   }
   .imageStats{
-    font-size: 17px;
+    font-size: 11px !important;
   }
   .centerCore{
     flex-grow: 0;

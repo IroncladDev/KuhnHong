@@ -2,6 +2,7 @@
 
 # dependencies
 plans.md
+.env
 /node_modules
 /.pnp
 .pnp.js

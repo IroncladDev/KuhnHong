@@ -21,3 +21,22 @@
   max-height: 100px;
   filter: drop-shadow(0 -30px 15px rgba(0,0,0,0.05));
 }
+@media(max-width: 500px){
+  .links > a{
+    margin: 10px;
+  }
+}
+@media(max-width: 400px){
+  .links > a{
+    display: block;
+  }
+  .links > a:nth-of-type(odd){
+    text-align: left;
+  }
+  .links > a:nth-of-type(even){
+    text-align: right;
+  }
+  .bound{
+    width: 60%;
+  }
+}
