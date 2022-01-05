@@ -6,18 +6,17 @@ import { Post } from '../../scripts/mongo.js'
 app.post(async (req, res) => {
   if (req.body.psw === process.env.ADMIN_PASSWORD) {
     try {
-      let pst = new Post({
-        title: req.body.title,
-        body: req.body.body,
-        cover: req.body.cover
-      });
-      pst.save();
-      res.json({ success: true })
+      let mark = await Post.findOne({ _id: req.body.dataId });
+      mark.remove();
+      res.json({
+        success: true
+      })
     } catch (err) {
       res.status(500).json({
         success: false,
         message: "Internal Server Error"
       })
+      console.log(err)
     }
   } else {
     res.json({

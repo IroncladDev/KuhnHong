@@ -46,7 +46,7 @@ body {
 
 p{
   max-width: 700px;
-  width: 80vw;
+  width: 80%;
   font-size: 18px;
   margin: 20px auto;
   line-height: 30px;
@@ -65,4 +65,43 @@ hr{
   max-width: 700px;
   width: 80vw;
   margin: 30px auto;
+}
+.swal2-popup{
+  max-width: 700px !important;
+  max-height: calc(100vh - 20px) !important;
+}
+.swal2-container{
+  max-height: 100vh !important;
+  overflow-y: auto !important;
+}
+.swal2-html-container{
+  padding: 0 25px !important;
+  border-right: solid 20px transparent;
+  padding-right: 15px !important;
+  overflow-x: hidden !important;
+}
+@media(max-width: 600px){
+  .swal2-html-container{
+    padding: 0 0px !important;
+    margin: 10px !important;
+    border-right: solid 35px transparent;
+    padding-right: 0px !important;
+    overflow-x: hidden !important;
+  }
+}
+button{
+  outline:none !important;
+}
+
+.swal2-html-container::-webkit-scrollbar{
+  width: 5px;
+}
+.swal2-html-container::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+.swal2-html-container::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+.swal2-html-container::-webkit-scrollbar-thumb:hover {
+  background: #555; 
 }

@@ -233,7 +233,6 @@ class MarkPics extends Component {
   }
 
 }
-
 class Emf extends Component {
   constructor(props) {
     super(props);
@@ -253,13 +252,13 @@ class Emf extends Component {
         psw: e.target.password.value
       })
     }).then(r => r.json()).then(data => {
-      if(data.success){
+      if (data.success) {
         Swal.fire({
           title: "Sent!",
           text: "Email sent to all subscribers.",
           icon: "success",
         })
-      }else{
+      } else {
         Swal.fire({
           title: "Failed",
           text: data.message,
@@ -276,12 +275,190 @@ class Emf extends Component {
       <div className={ui.formLabel}>Message Body</div>
       <textarea placeholder="body content..." name="body" rows="4" className={ui.inputSmall}></textarea>
       <div className={ui.formLabel}>Confirm Password</div>
-      <input className={ui.inputSmall} name="password" placeholder="It's a secret!" />
-      <button type="submit" className={ui.submit} style={{marginTop: 20}}>Send</button>
+      <input className={ui.inputSmall} name="password" placeholder="It's a secret!" type="password" />
+      <button type="submit" className={ui.submit} style={{ marginTop: 20 }}>Send</button>
     </form>)
   }
 }
 
+class BlogPost extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      image: ''
+    }
+    this.submit = this.submit.bind(this);
+    this.getBase64 = this.getBase64.bind(this);
+  }
+  getBase64(e) {
+    Toast.fire("Uploading...", "", "info")
+    const cookie = name => `; ${document.cookie}`.split(`; ${name}=`).pop().split(';').shift();
+    var self = this;
+    var file = e.target.files[0];
+    var reader = new FileReader();
+    reader.onload = async function (upload) {
+      let bs4 = upload.target.result;
+      let data = await fetch("https://kuhnhong.devservers.repl.co/api/upload", {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          url: bs4,
+          auth: cookie("admin_session")
+        })
+      }).then(r => r.json())
+
+      if (data.success) {
+        self.setState({
+          image: data.image
+        })
+        Toast.fire("Image Uploaded!", "", "success")
+      } else {
+        console.log("Error")
+      }
+    }
+    reader.readAsDataURL(file);
+  }
+  submit(e) {
+    e.preventDefault();
+    fetch("/api/blogpost", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "accept": "*/*"
+      },
+      body: JSON.stringify({
+        title: e.target.title.value,
+        body: e.target.body.value.replace(/\n/g, "<br>"),
+        cover: this.state.image,
+        psw: e.target.password.value
+      })
+    }).then(r => r.json()).then(data => {
+      if (data.success) {
+        document.getElementById("postform").reset();
+        Swal.fire({
+          title: "Posted!",
+          text: "Post created Successfully.  Don't forget to share it with your subscribers!",
+          icon: "success",
+        })
+        this.props.updateData();
+      } else {
+        Swal.fire({
+          title: "Failed",
+          text: data.message,
+          icon: "error",
+        })
+      }
+    })
+  }
+  render() {
+    return (<form onSubmit={this.submit} className={ui.form} id="postform">
+      <h2 className={ui.formHeader}>Create Blog Post</h2>
+      <div className={ui.formLabel}>Image Cover</div>
+      <input className={ui.submit} type="file" onChange={this.getBase64} />
+      <div className={ui.formLabel}>Title</div>
+      <input className={ui.inputSmall} name="title" placeholder="New exhibit coming soon" />
+      <div className={ui.formLabel}>Body</div>
+      <textarea placeholder="..." name="body" rows="6" className={ui.inputSmall}></textarea>
+      <div className={ui.formLabel}>Confirm Password</div>
+      <input className={ui.inputSmall} name="password" placeholder="secrecy" type="password" />
+      <button type="submit" className={ui.submit} style={{ marginTop: 20 }}>Post</button>
+    </form>)
+  }
+}
+
+class BlogDel extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: 0
+    }
+    this.update = this.update.bind(this);
+    this.del = this.del.bind(this);
+  }
+  update(e) {
+    this.setState({
+      value: e.target.value
+    })
+  }
+  async del() {
+    const { value: password } = await Swal.fire({
+      title: 'Delete Painting?',
+      text: "Are you sure you would like to delete the painting “" + this.props.data[this.state.value].title + "”? You cannot undo this action.",
+      input: 'password',
+      inputLabel: 'Password',
+      inputPlaceholder: 'Enter password',
+      icon: 'warning',
+      showCancelButton: true
+    })
+
+    if (password) {
+      fetch("/api/delpost", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "accept": "*/*"
+        },
+        body: JSON.stringify({
+          psw: password,
+          dataId: this.props.data[this.state.value]._id
+        })
+      }).then(r => r.json())
+        .then(data => {
+          if (data.success) {
+            this.props.updateData();
+            Swal.fire({
+              title: "Deleted",
+              text: "Painting was successfully deleted.",
+              icon: "success"
+            })
+          } else {
+            Swal.fire({
+              title: "Failed",
+              text: data.message,
+              icon: "error"
+            })
+          }
+        })
+    }
+  }
+  render() {
+    return (<div className={ui.form}>
+      <h2 className={ui.formHeader}>Blogpost Deletion</h2>
+      <div className={ui.formLabel}>Select Post</div>
+      <select name="selectPainting" onChange={this.update} value={this.state.value} className={ui.submit}>
+        {this.props.data.map((x, i) => <option key={i} value={i}>{x.title}</option>)}
+      </select>
+
+      <button className={ui.submit} style={{ background: 'rgb(255, 75, 75)', marginTop: 20 }} onClick={this.del}>Delete</button>
+
+    </div>)
+  }
+}
+
+class BlogData extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: []
+    }
+    this.componentDidMount = this.componentDidMount.bind(this);
+  }
+  componentDidMount() {
+    fetch("/api/blog").then(r => r.json()).then(data => {
+      this.setState({
+        data
+      })
+    })
+  }
+  render() {
+    return (<div>
+      <BlogPost updateData={this.componentDidMount} />
+      <BlogDel data={this.state.data} updateData={this.componentDidMount}/>
+    </div>)
+  }
+}
 export default class Admin extends Component {
   constructor(props) {
     super(props);
@@ -295,6 +472,7 @@ export default class Admin extends Component {
         <CreatePic />
         <MarkPics updateData={this.props.updateData} data={this.props.data} />
         <Emf />
+        <BlogData />
       </div>
     </div>)
   }
