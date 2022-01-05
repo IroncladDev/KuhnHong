@@ -21,7 +21,8 @@ export default class Gallery extends Component {
       index: 0,
       category: 0,
       data: fallbackData(0),
-      allData: []
+      allData: [],
+      opacity: 0
     }
     this.moveBy = this.moveBy.bind(this);
     this.sortCategories = this.sortCategories.bind(this);
@@ -43,8 +44,9 @@ export default class Gallery extends Component {
     this.setState({
       index: 0,
       category: cat,
-      data: data.length > 0 ? data : fallbackData(cat)
+      data: data.length > 0 ? data : fallbackData(cat),
     })
+
   }
   componentDidMount() {
     fetch("/api/paintings").then(r => r.json()).then(data => {
@@ -67,7 +69,7 @@ export default class Gallery extends Component {
             <div className={styles.sld}>
               <button onClick={() => this.moveBy(-1)} className={styles.slideBtn}><i className="fas fa-chevron-left"></i></button>
             </div>
-            <div className={styles.centerCore} style={{ backgroundImage: `url(${this.state.data[this.state.index].image})` }}>
+            <div className={styles.centerCore} style={{ backgroundImage: `url(${this.state.data[this.state.index].image})` }} id="centercore">
 
               <div className={styles.imageCover}>
                 <div className={styles.centerCover}>
@@ -84,7 +86,7 @@ export default class Gallery extends Component {
                   {Types.map((t, ind) => <option key={ind} value={ind}>{t}</option>)}
                 </select>
                 <div style={{display: 'flex'}}>
-                  {this.state.data.map((d, ind) => <div onClick={() => {
+                  {this.state.data.length > 1 && this.state.data.map((d, ind) => <div onClick={() => {
                     this.setState({
                       index: ind
                     })

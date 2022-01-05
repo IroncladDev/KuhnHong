@@ -75,17 +75,14 @@ hr{
   overflow-y: auto !important;
 }
 .swal2-html-container{
-  padding: 0 25px !important;
-  border-right: solid 20px transparent;
-  padding-right: 15px !important;
+  padding: 0 15px !important;
   overflow-x: hidden !important;
+  margin: 0 5px !important;
+  margin-top: 50px !important;
 }
 @media(max-width: 600px){
   .swal2-html-container{
-    padding: 0 0px !important;
-    margin: 10px !important;
-    border-right: solid 35px transparent;
-    padding-right: 0px !important;
+    
     overflow-x: hidden !important;
   }
 }
@@ -93,15 +90,8 @@ button{
   outline:none !important;
 }
 
-.swal2-html-container::-webkit-scrollbar{
-  width: 5px;
-}
-.swal2-html-container::-webkit-scrollbar-track {
-  background: #f1f1f1; 
-}
-.swal2-html-container::-webkit-scrollbar-thumb {
-  background: #888; 
-}
-.swal2-html-container::-webkit-scrollbar-thumb:hover {
-  background: #555; 
+.swal2-close{
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
 }

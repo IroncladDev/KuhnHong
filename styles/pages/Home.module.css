@@ -27,7 +27,7 @@
 }
 .stretchSVG{
   width: 100vw;
-  height: 100vh;
+  height: 100%;
 }
 .slantSec{
   filter: drop-shadow(0 -30px 15px rgba(0,0,0,0.1));
@@ -62,14 +62,36 @@
   }
 }
 @media(max-width: 800px){
-  .blockPortrait{
-    display: none;
+  .contFlex{
+    display: block;
+    position: relative;
+    top: 70px;
+    top: 0;
+    transform: none;
   }
   .blockDesc{
     max-width: 80vw;
+    align-self: none;
+    justify-self: none;
+    display: block;
+    margin: 20px 0;
+  }
+  .blockPortrait{
+    width: 80vw;
+    max-width: 300px;
+    margin: auto;
+    height: auto;
+  }
+  .portrait{
+    margin: auto;
+    width: 100%;
+    height: auto;
   }
   .titleHeader{
     text-align: center !important;
+  }
+  .titleHeader {
+    font-size: 3em !important;
   }
 }
 @media (max-width: 675px) {
@@ -79,6 +101,6 @@
 }
 @media (max-width: 500px) {
   .titleHeader {
-    font-size: 3em !important;
+    font-size: 2.5em !important;
   }
 }

@@ -35,7 +35,9 @@
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
+  transition: 0.5s;
 }
+
 .imageTitle {
   color: var(--w-5);
   font-size: 3em;

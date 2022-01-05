@@ -16,7 +16,7 @@ function Post(props) {
       <h1>${props.title}</h1>
       <p style="width: 90%;">${props.desc}</p>
       <hr/>
-      <span style="text-align:left !important;color: var(--w-1);font-weight: 300;">&copy; Kuhn Hong 2022</span>
+      <span style="text-align:left !important;color: var(--g-bright);font-weight: 300;">&copy; Kuhn Hong 2022</span>
       </div>`,
       width: `100%`,
       showConfirmButton: false,
