@@ -16,6 +16,7 @@ export default function Gallery(props) {
     <div className={styles.imageGrid}>
       {props.paintings.filter(x => x.topic === cat).map(x =>
         <img
+          key={Math.random()}
           src={x.image}
           alt={x.description}
           onClick={() => setImage(x._id)}
