@@ -3,7 +3,8 @@ import { Pic } from '../../scripts/mongo.js'
 
 const app = nc()
 app.post((req, res) => {
-  if (req.body.auth === process.env.ADMSS) {
+  console.log(req.body)
+  if (req.body.auth === process.env.ADMSS || req.cookies.admin_session === process.enc.ADMSS) {
     let pic = new Pic({
       title: req.body.title,
       image: req.body.image,

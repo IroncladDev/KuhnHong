@@ -17,13 +17,12 @@ const Toast = Swal.mixin({
   }
 })
 
-const Types = ["Previous Exhibitions", "Landscapes", "Portraits", "Figures", "Still Life"]
-
 class CreatePic extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      image: ''
+      image: '',
+      categories: []
     }
     this.getBase64 = this.getBase64.bind(this);
     this.submit = this.submit.bind(this);
@@ -93,6 +92,15 @@ class CreatePic extends Component {
     }
     reader.readAsDataURL(file);
   }
+
+  componentDidMount(){
+    fetch("/api/paintings").then(r => r.json()).then(data => {
+      this.setState({
+        categories: [...new Set(data.map(x => x.topic))]
+      })
+    });
+  }
+  
   render() {
     return (<form className={ui.form} onSubmit={this.submit} id="upload-form">
       <h1 className={ui.formHeader}>Add a Painting</h1>
@@ -102,8 +110,7 @@ class CreatePic extends Component {
       <textarea className={ui.inputSmall} name="description" rows="2" placeholder="Describe it well" required></textarea>
       <div className={ui.formLabel}>Upload the Painting</div>
       <input className={ui.submit} type="file" onChange={this.getBase64} name="image" required />
-      <div className={ui.formLabel}>Price (USD)</div>
-      <input className={ui.inputSmall} placeholder="$$$" name="price" type="number" accept="image/*" required />
+      <input type="hidden" name="price" value="0"/>
       <div className={ui.formLabel}>Is it available for purchase? (sold/unsold)</div>
       <select name="sold" className={ui.submit}>
         <option value="false">Unsold</option>
@@ -111,9 +118,10 @@ class CreatePic extends Component {
       </select>
 
       <div className={ui.formLabel}>Painting Topic / Category</div>
-      <select name="topic" className={ui.submit}>
-        {Types.map((d, i) => <option key={i} value={i}>{d}</option>)}
-      </select>
+      <input name="topic" className={ui.inputSmall} list="topic-list"/>
+      <datalist id="topic-list">
+        {this.state.categories.map((d, i) => <option key={i} value={d}>{d}</option>)}
+      </datalist>
 
       <button type="submit" className={ui.button} style={{ marginBottom: 0 }}>Submit</button>
     </form>)

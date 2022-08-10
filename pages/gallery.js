@@ -6,10 +6,10 @@ import { Component, createRef } from 'react';
 import Script from 'next/script'
 
 const Types = ["Previous Exhibitions", "Landscapes", "Portraits", "Figures", "Still Life"]
-const fallbackData = (cat) => [{
+const fallbackData = (cat, topics) => [{
   title: "Oh No!",
   image: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVQYV2NgYAAAAAMAAWgmWQ0AAAAASUVORK5CYII=',
-  description: "There are no " + Types[cat] + " paintings yet.",
+  description: "There are no " + topics[cat] + " paintings yet.",
   price: 0,
   topic: cat
 }];
@@ -20,9 +20,10 @@ export default class Gallery extends Component {
     this.state = {
       index: 0,
       category: 0,
-      data: fallbackData(0),
+      data: fallbackData(0, []),
       allData: [],
-      opacity: 0
+      opacity: 0,
+      categories: []
     }
     this.moveBy = this.moveBy.bind(this);
     this.sortCategories = this.sortCategories.bind(this);
@@ -39,21 +40,22 @@ export default class Gallery extends Component {
     })
   }
   sortCategories(e) {
-    let cat = Number(e.target.value);
+    let cat = e.target.value;
     let data = this.state.allData.filter(x => x.topic === cat);
     this.setState({
       index: 0,
       category: cat,
-      data: data.length > 0 ? data : fallbackData(cat),
+      data: data.length > 0 ? data : fallbackData(cat, this.state.categories),
     })
 
   }
   componentDidMount() {
     fetch("/api/paintings").then(r => r.json()).then(data => {
       this.setState({
-        allData: data
+        allData: data,
+        categories: [...new Set(data.map(x => x.topic))]
       })
-      this.sortCategories({ target: { value: 0 } });
+      this.sortCategories({ target: { value: [...new Set(data.map(x => x.topic))][0] } });
     })
   }
   render() {
@@ -76,14 +78,14 @@ export default class Gallery extends Component {
                   <h1 className={styles.imageTitle}>{this.state.data[this.state.index].title}</h1>
                   <p className={styles.imageDesc}>{this.state.data[this.state.index].description}</p>
                   <div className={styles.imageStats}>
-                    {Types[this.state.data[this.state.index].topic]}{' • $'}{this.state.data[this.state.index].price}{' • '}{this.state.data[this.state.index].sold === undefined ? "Not available" : (this.state.data[this.state.index].sold ? "Sold" : "Available for Purchase")}
+                    {/*this.state.categories[this.state.data[this.state.index].topic]}{' • $'}{this.state.data[this.state.index].price}{' • '}{this.state.data[this.state.index].sold === undefined ? "Not available" : (this.state.data[this.state.index].sold ? "Sold" : "Available for Purchase")*/}
                   </div>
                 </div>
               </div>
 
               <div className={styles.dots}>
                 <select className={styles.sorter} onChange={this.sortCategories}>
-                  {Types.map((t, ind) => <option key={ind} value={ind}>{t}</option>)}
+                  {this.state.categories.map((t, ind) => <option key={ind} value={t}>{t}</option>)}
                 </select>
                 <div style={{display: 'flex'}}>
                   {this.state.data.length > 1 && this.state.data.map((d, ind) => <div onClick={() => {

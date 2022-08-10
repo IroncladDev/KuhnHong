@@ -17,7 +17,7 @@ const postSchema = new mongoose.Schema({
 const paintingSchema = new mongoose.Schema({
   title: { type: String, index: true },
   description: { type: String, index: true },
-  topic: { type: Number, index: true },
+  topic: { type: String, index: true },
   price: { type: Number, index: true },
   sold: { type: Boolean, index: true, default: false },
   image: { type: String, index: true }
