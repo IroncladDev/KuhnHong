@@ -7,10 +7,10 @@ import text from '../styles/text.module.css';
 import cs from '../scripts/multiclass'
 import Path from '../components/curvePath'
 import Nav from '../components/nav';
+import Footer from '../components/footer'
 import Fade from '../components/fade';
 import Link from 'next/link'
 import ui from '../styles/ui.module.css'
-import Footer from '../components/footer'
 import Swal from 'sweetalert2'
 import { Component } from 'react'
 export default class Home extends Component {
