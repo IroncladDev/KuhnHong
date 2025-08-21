@@ -89,41 +89,6 @@ export default class Home extends Component {
             </div>
           </section>
 
-          <section style={{ paddingBottom: 50 }}>
-            <h1 className={cs(text.header, text.h1)} style={{ marginBottom: 50 }}>Art from a new Perspective</h1>
-            <p>Want to stay updated with the latest news and new paintings?  Be sure to subscribe!</p>
-            <form onSubmit={(e) => {
-              e.preventDefault();
-              fetch("/api/subscribe", {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                  accept: "*/*"
-                },
-                body: JSON.stringify({
-                  email: e.target.email.value
-                })
-              }).then(r => r.json()).then(data => {
-                if (data.success) {
-                  Swal.fire({
-                    title: "Success!",
-                    text: "Thank you for subscribing!",
-                    icon: "success",
-                  })
-                } else {
-                  Swal.fire({
-                    title: "Failed",
-                    text: data.message,
-                    icon: "error",
-                  })
-                }
-              })
-            }}>
-              <input className={ui.input} placeholder="you@email.com" name="email" type="email" />
-              <button className={ui.button} type="submit">Subscribe</button>
-            </form>
-          </section>
-
           <Footer />
 
           <Nav />

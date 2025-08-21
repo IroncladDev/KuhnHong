@@ -24,18 +24,6 @@ export default function About() {
         <h3>Address: 505 N. Lake Shore Dr. #1004
           Chicago, IL, 60611</h3>
       </p>
-
-      <hr/>
-
-      <h2 className={text.header + " " + text.h2}>Don&apos;t forget to subscribe!</h2>
-      <p style={{textAlign: 'center'}}>Want to stay updated with the latest news and new paintings?  Be sure to subscribe!</p>
-      <form method="POST" action="/" onSubmit={(e) => {
-            e.preventDefault();
-            alert("Implement Subscribe Form API")
-          }}>
-            <input className={ui.input} placeholder="you@email.com" name="email" />
-            <button className={ui.button}>Subscribe</button>
-          </form>
     </section>
 
     <Footer />

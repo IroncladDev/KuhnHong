@@ -15,7 +15,6 @@ export default function Footer(props) {
           <Link href="/about">About</Link>
           <Link href="/gallery">Gallery</Link>
           <Link href="/contact">Contact</Link>
-          <Link href="/blog">Blog</Link>
         </div>
         <hr />
         <div>&copy; Kuhn Hong 2021</div>

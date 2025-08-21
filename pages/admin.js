@@ -22,13 +22,14 @@ export default class ADM extends Component {
     var reader = new FileReader();
     reader.onload = async function (upload) {
       let bs4 = upload.target.result;
-      let data = await fetch("https://kuhnhong.devservers.repl.co/api/upload", {
+      let data = await fetch("/api/upload", {
         method: "POST",
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          url: bs4
+          base64: bs4,
+          auth: cookie("admin_session"),
         })
       }).then(r => r.json())
 

@@ -1,7 +1,7 @@
-import styles from '../styles/components/nav.module.css';
-import text from '../styles/text.module.css'
-import Link from 'next/link';
-import cs from '../scripts/multiclass'
+import styles from "../styles/components/nav.module.css";
+import text from "../styles/text.module.css";
+import Link from "next/link";
+import cs from "../scripts/multiclass";
 export default function Nav() {
   return (
     <div className={styles.nav}>
@@ -19,11 +19,8 @@ export default function Nav() {
         </Link>
       </div>
       <div className={styles.linkGroup}>
-      <Link href="/contact" passHref>
+        <Link href="/contact" passHref>
           <span className={cs(text.link, styles.link)}>Contact</span>
-        </Link>
-        <Link href="/blog" passHref>
-          <span className={cs(text.link, styles.link)}>Blog</span>
         </Link>
       </div>
     </div>
